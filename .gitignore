@@ -6,3 +6,4 @@ venv
 .sql
 .sqlite
 .dio
+__pycache__
