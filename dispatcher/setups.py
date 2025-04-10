@@ -1,7 +1,6 @@
 from aiogram.dispatcher.event.telegram import TelegramEventObserver
 from aiogram.types import BotCommand
-from aiogram.filters import CommandStart
-from aiogram import Bot, Dispatcher
+from aiogram import Bot, Dispatcher, Router
 from typing import Callable, Any, Union
 import logging
 
@@ -38,6 +37,11 @@ async def setup_commands(bot: Bot, bot_commands: dict):
     )
 
 
-def setup_handlers(dp: Dispatcher, handlers: list[dict]):
+def setup_handlers(target: Dispatcher | Router, handlers: list[dict]):
     for handler in handlers:
-        dp.message.register(handler["handler"], *handler["filters"])
+        target.message.register(handler["handler"], *handler["filters"])
+
+
+def setup_callback_handlers(target: Dispatcher | Router, handlers: list[dict]):
+    for handler in handlers:
+        target.callback_query.register(handler["handler"], *handler["filters"])
