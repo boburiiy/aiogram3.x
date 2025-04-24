@@ -7,3 +7,5 @@ venv
 .sqlite
 .dio
 __pycache__
+test*
+*test
