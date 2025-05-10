@@ -1,7 +1,6 @@
-from aiogram.dispatcher.event.telegram import TelegramEventObserver
-from aiogram.types import BotCommand
+from aiogram.types import BotCommand, TelegramObject
 from aiogram import Bot, Dispatcher, Router
-from typing import Callable, Any, Union
+from typing import Callable, Any, Awaitable
 import logging
 
 import sys
@@ -29,7 +28,7 @@ def setup_logging():
     )
 
 
-async def setup_commands(bot: Bot, bot_commands: dict):
+async def setup_commands(bot: Bot, bot_commands: dict[str, str]):
     await bot.set_my_commands(
         [
             BotCommand(command=cmd, description=desc) for cmd, desc in bot_commands.items()
@@ -37,11 +36,30 @@ async def setup_commands(bot: Bot, bot_commands: dict):
     )
 
 
-def setup_handlers(target: Dispatcher | Router, handlers: list[dict]):
+def setup_handlers(target: Dispatcher | Router, handlers: list[dict[Awaitable, Any]]):
     for handler in handlers:
         target.message.register(handler["handler"], *handler["filters"])
 
 
-def setup_callback_handlers(target: Dispatcher | Router, handlers: list[dict]):
+def setup_error_handlers(target: Dispatcher | Router, handler: Awaitable):
+    target.error.register(handler)
+
+
+def setup_callback_handlers(target: Dispatcher | Router, handlers: list[dict[Awaitable, Any]]):
     for handler in handlers:
         target.callback_query.register(handler["handler"], *handler["filters"])
+
+
+def setup_middlewares(target: Dispatcher | Router, midwrs: list[TelegramObject]):
+    for midw in midwrs:
+        target.message.middleware(midw)
+
+
+def setup_callback__middlewares(target: Dispatcher | Router, midwrs: list[TelegramObject]):
+    for midw in midwrs:
+        target.callback_query.middleware(midw)
+
+
+def setup_routers(dp: Dispatcher, routers: list[Router]):
+    for router in routers:
+        dp.include_router(router)
