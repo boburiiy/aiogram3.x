@@ -2,7 +2,8 @@ from aiogram.client.default import DefaultBotProperties
 from .middlewares import middlewares_list
 from aiogram import Bot, Dispatcher
 from router.base_router import r1
-from environs import env
+from dotenv import dotenv_values
+env = dotenv_values()
 from .setups import (
     setup_routers,
     notify_admins,
@@ -31,18 +32,20 @@ __all__ = [
     'bot',
     'dp',
 ]
-env.read_env()
-ADMINS = env.list('ADMINS')
-TOKEN = env.str('TOKEN')
+ # reading enviroment variables
 
+ADMINS = env.get('ADMINS').split()  # defining admins
+TOKEN = env.get('TOKEN')  # defining bot token
 dp = Dispatcher()
 bot = Bot(TOKEN, default=DefaultBotProperties(parse_mode='HTML'))
 
 routers = [
+    # including routers
     r1
 ]
 
 bot_commands = {
+    # Default bot commands
     'start': "restart the bot",
     'help': "get some help"
 }
