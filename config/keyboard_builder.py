@@ -14,7 +14,7 @@ from typing import Optional, Type
 
 
 class kb_builder():
-    # documentqation crated by ai just because developer is lazy
+    # documentation crated by ai just because developer is lazy
     """
     kb_builder is a class for managing and storing keyboard layouts for aiogram bots.
     Attributes:
@@ -31,7 +31,8 @@ class kb_builder():
                 max_width (int): Maximum width of the keyboard.
                 max_buttons (int): Maximum number of buttons allowed.
             Registers the keyboard in the kb_builder.keyboards dictionary under the appropriate type ('inline' or 'reply').
-        get(self, name: str, kb_type: str = 'reply') -> Optional[Type[KeyboardBuilder]]:
+        
+	get(self, name: str, kb_type: str = 'reply') -> Optional[Type[KeyboardBuilder]]:
             Retrieves a registered keyboard by name and type.
             Args:
                 name (str): The name of the keyboard to retrieve.
@@ -83,3 +84,4 @@ class kb_builder():
     @staticmethod
     def kb_list():
         return kb_builder.keyboards
+
