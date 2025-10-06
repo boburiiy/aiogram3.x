@@ -1,9 +1,3 @@
-from aiogram.client.default import DefaultBotProperties
-from .middlewares import middlewares_list
-from aiogram import Bot, Dispatcher
-from router.base_router import r1
-from dotenv import dotenv_values
-env = dotenv_values()
 from .setups import (
     setup_routers,
     notify_admins,
@@ -15,6 +9,13 @@ from .setups import (
     setup_callback_handlers,
     setup_callback__middlewares
 )
+from aiogram.client.default import DefaultBotProperties
+from .middlewares import middlewares_list
+from aiogram import Bot, Dispatcher
+from router.base_router import r1
+from environs import Env
+env = Env()
+env.read_env()
 __all__ = [
     'setup_routers',
     'setup_callback__middlewares',
@@ -32,10 +33,10 @@ __all__ = [
     'bot',
     'dp',
 ]
- # reading enviroment variables
+# reading enviroment variables
 
-ADMINS = env.get('ADMINS').split()  # defining admins
-TOKEN = env.get('TOKEN')  # defining bot token
+ADMINS = env.list('ADMINS')  # defining admins
+TOKEN = env.str('BOT_TOKEN')  # defining bot token
 dp = Dispatcher()
 bot = Bot(TOKEN, default=DefaultBotProperties(parse_mode='HTML'))
 
