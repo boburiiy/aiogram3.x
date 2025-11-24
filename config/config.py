@@ -36,7 +36,7 @@ __all__ = [
 # reading enviroment variables
 
 ADMINS = env.list('ADMINS')  # defining admins
-TOKEN = env.str('BOT_TOKEN')  # defining bot token
+TOKEN = env.str('TOKEN')  # defining bot token
 dp = Dispatcher()
 bot = Bot(TOKEN, default=DefaultBotProperties(parse_mode='HTML'))
 

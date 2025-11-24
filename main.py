@@ -5,9 +5,6 @@ import asyncio
 
 
 async def aynchronus_funcs():
-    """
-    Aynchronus startup functions
-    """
     await asyncio.create_task(bot.delete_webhook(drop_pending_updates=True))  # deleting webhook for anycase
     await asyncio.sleep(.5)  # sleeping .5 seconds
     # setting up default commands
@@ -18,9 +15,6 @@ async def aynchronus_funcs():
 
 
 def start_funcs():
-    """
-    Startup functions
-    """
     setup_logging()  # setting up logging
     setup_middlewares(dp, middlewares_list)  # setting up middlewares
     # setting up middlewares for callback handlers
@@ -35,7 +29,7 @@ def start_funcs():
 
 
 async def main():
-    """Main function"""
+    
     await aynchronus_funcs()
     start_funcs()
     await dp.start_polling(bot) # starting polling

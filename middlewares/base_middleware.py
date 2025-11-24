@@ -7,13 +7,7 @@ import logging
 
 
 class Throttling(BaseMiddleware):
-    """
-    Throttling middleware for aiogram 3.x.
-    This middleware limits how frequently a user can trigger a handler, preventing spam or excessive requests.
-    Attributes:
-        delay (float): Minimum time interval (in seconds) required between consecutive calls from the same user.
-        last_call (dict): Stores the timestamp of the last call for each user
-    """
+    
 
     def __init__(self, delay: float = 1):
         self.delay = delay
