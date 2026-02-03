@@ -1,5 +1,5 @@
 # Aiogram 3.x Telegram Bot Project
-
+After long time im sure that this prokect is a shit made with ai ps:author
 ## Overview
 
 This project is a modular, extensible Telegram bot built using [aiogram 3.x](https://docs.aiogram.dev/en/latest/) what was inspired by django`s work logic, an asynchronous Python framework for Telegram Bot API. The codebase is organized for scalability, maintainability, and ease of adding new features, handlers, and middlewares.
